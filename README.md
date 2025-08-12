@@ -21,7 +21,9 @@ The LEDs are connected to the ESP-WROOM-32 through resistors, as shown in the sc
 
 ### Setup
 1. Clone this repository:
-
+   ```bash
+   git clone https://github.com/Zac-Unmade/Telemetry.git
+   cd Telemetry
 
 
 
