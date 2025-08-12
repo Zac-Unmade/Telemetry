@@ -23,7 +23,26 @@ The LEDs are connected to the ESP-WROOM-32 through resistors, as shown in the sc
 1. Clone this repository:
    ```bash
    git clone https://github.com/Zac-Unmade/Telemetry.git
-   cd Telemetry
+   cd Telemetry ```
+2. Set up the ESP-IDF environment:
+   ```bash
+   . $HOME/esp/esp-idf/export.sh ```
+3. Configure the project:
+   ```bash
+   idf.py menuconfig ```
+4. Build the project:
+   ```bash
+   idf.py bulid ```
+5. Flash the firmware to your ESP32:
+   ```bash
+   idf.py flash ```
+6. Monitor the serial output:
+   ```bash
+   idf.py monitor ```
 
-
+## Folder Structure
+- main/ — Main application source code and CMakeLists
+- components/cjson/ — External JSON parsing library component
+- build/ — Build output (excluded from repo)
+- .vscode/ — Editor settings (excluded from repo)
 
