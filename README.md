@@ -11,3 +11,17 @@ This project is an ESP-WROOM-32 based telemetry system that collects and process
 The LEDs are connected to the ESP-WROOM-32 through resistors, as shown in the schematic below. This ensures correct current limiting and stable operation.
 
 ![Step 1](circuit_esp_telemetry.png)
+
+
+## Getting Started
+### Prerequisites
+- ESP-IDF development environment installed
+- Python 3.x
+- Git (for cloning the repo)
+
+### Setup
+1. Clone this repository:
+
+
+
+
