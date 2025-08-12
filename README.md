@@ -41,8 +41,8 @@ The LEDs are connected to the ESP-WROOM-32 through resistors, as shown in the sc
    idf.py monitor
 
 ## Folder Structure
-- main/ — Main application source code and CMakeLists
-- components/cjson/ — External JSON parsing library component
-- build/ — Build output (excluded from repo)
-- .vscode/ — Editor settings (excluded from repo)
+- `main/` — Main application source code and CMakeLists
+- `components/cjson/` — External JSON parsing library component
+- `build/` — Build output (excluded from repo)
+- `.vscode/` — Editor settings (excluded from repo)
 
