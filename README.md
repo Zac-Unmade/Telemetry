@@ -9,4 +9,5 @@ This project is an ESP-WROOM-32 based telemetry system that collects and process
 
 ## Electrical Schematic
 The LEDs are connected to the ESP-WROOM-32 through resistors, as shown in the schematic below. This ensures correct current limiting and stable operation.
+
 ![Step 1](circuit_esp_telemetry.png)
