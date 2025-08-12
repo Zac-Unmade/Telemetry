@@ -1,0 +1,18 @@
+# Build output folder
+/build/
+
+# ESP-IDF build output
+/*.bin
+/*.elf
+/*.map
+/*.hex
+/*.fls
+/*.log
+
+# VSCode settings folder
+.vscode/
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
