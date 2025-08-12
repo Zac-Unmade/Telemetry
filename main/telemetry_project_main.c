@@ -14,10 +14,10 @@
 #include "esp_http_server.h"
 #include "cJSON.h"
 
-#define LED_PIN GPIO_NUM_4  // D4 pin on ESP-WROOM-32 //========================================
+#define LED_PIN GPIO_NUM_4  
 #define LED_ALWAYS_ON GPIO_NUM_2
 
-#define MAX_ENTRIES 100  // How many telemetry points we’ll store
+#define MAX_ENTRIES 100  
 
 #define GET_INT(item)   ((item) && cJSON_IsNumber(item) ? (item)->valueint : ((item) && cJSON_IsString(item) ? atoi(cJSON_GetStringValue(item)) : 0))
 #define GET_FLOAT(item) ((item) && cJSON_IsNumber(item) ? (float)(item)->valuedouble : ((item) && cJSON_IsString(item) ? atof(cJSON_GetStringValue(item)) : 0.0f))
@@ -30,7 +30,7 @@ typedef struct {
     float battery_voltage;
     float alternator_voltage;
     float current_draw;
-    int soc; // state of charge %
+    int soc; // state of charge
 } TelemetryData;
 
 TelemetryData telemetry_log[MAX_ENTRIES];
@@ -41,7 +41,6 @@ int telemetry_count = 0;
 
 static const char *TAG = "web_server";
 
-/* Simple HTTP GET handler */
 esp_err_t root_get_handler(httpd_req_t *req) {
     const char* html = 
         "<!DOCTYPE html>\n"
@@ -248,7 +247,6 @@ esp_err_t submit_post_handler(httpd_req_t *req) {
         return ESP_FAIL;
     }
 
-    // Read the body in chunks until full
     while (received < total_len) {
         int ret = httpd_req_recv(req, content + received, total_len - received);
         if (ret <= 0) {
@@ -258,9 +256,8 @@ esp_err_t submit_post_handler(httpd_req_t *req) {
         received += ret;
     }
 
-    content[received] = '\0'; // Null terminate
+    content[received] = '\0';
 
-    // Parse JSON using cJSON
     cJSON *json = cJSON_Parse(content);
     if (!json) {
         httpd_resp_send_500(req);
@@ -305,7 +302,6 @@ esp_err_t submit_post_handler(httpd_req_t *req) {
 }
 
 esp_err_t data_get_handler(httpd_req_t *req) {
-    // Create JSON array
     cJSON *root = cJSON_CreateArray();
 
     for (int i = 0; i < telemetry_count; i++) {
@@ -323,18 +319,15 @@ esp_err_t data_get_handler(httpd_req_t *req) {
 
     char *json_str = cJSON_PrintUnformatted(root);
 
-    // Set content type to JSON
     httpd_resp_set_type(req, "application/json");
     httpd_resp_sendstr(req, json_str);
 
-    // Cleanup
     cJSON_Delete(root);
     free(json_str);
 
     return ESP_OK;
 }
 
-// /* URI handler */
 httpd_uri_t root_uri = {
     .uri       = "/",
     .method    = HTTP_GET,
@@ -380,7 +373,6 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
     }
 }
 
-/* Initialize WiFi in Station mode */
 void wifi_init_sta(void) {
     esp_netif_init();
     esp_event_loop_create_default();
@@ -408,8 +400,8 @@ void wifi_init_sta(void) {
 }
 
 void app_main(void) {
-    gpio_reset_pin(LED_PIN); //========================================
-    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT); //========================================
+    gpio_reset_pin(LED_PIN);
+    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
     gpio_reset_pin(LED_ALWAYS_ON);
     gpio_set_direction(LED_ALWAYS_ON, GPIO_MODE_OUTPUT);
     gpio_set_level(LED_ALWAYS_ON, 1);
@@ -421,4 +413,3 @@ void app_main(void) {
 
     wifi_init_sta();
 }
-
