@@ -36,8 +36,8 @@ typedef struct {
 TelemetryData telemetry_log[MAX_ENTRIES];
 int telemetry_count = 0;
 
-#define WIFI_SSID "PLUSNET-T5JW"
-#define WIFI_PASS "c37e62d75c"
+#define WIFI_SSID "Your_SSID"
+#define WIFI_PASS "enter password here"
 
 static const char *TAG = "web_server";
 
@@ -413,3 +413,4 @@ void app_main(void) {
 
     wifi_init_sta();
 }
+
